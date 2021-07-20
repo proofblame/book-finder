@@ -1,0 +1,12 @@
+.main {
+
+  padding-top: 20px;
+}
+
+.main__subtitle {
+  font: normal 400 16px "Roboto", sans-serif;
+  color: #000;
+
+  margin: 0;
+  padding: 0;
+}

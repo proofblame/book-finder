@@ -1,21 +1,33 @@
 import React from 'react';
 import './Element.css';
 
-const Element = () => {
+const Element = ({book}) => {
   return (
-    <section class="element section">
+    <section className="element section">
       <div className="element__wrapper">
         <div className="element__figure">
-          <img className="element__image" src="https://reactjsexample.com/content/images/2019/04/React.jpg" alt="React.js" />
+          <img className="element__image" src={
+            book.volumeInfo.imageLinks
+              ? book.volumeInfo.imageLinks.thumbnail
+              : 'https://cima-afrique.org/cima/images/not-available.png'
+          } alt={book.volumeInfo.title} />
         </div>
 
         <div className="element__body">
-          <p className="element__categories">Art / General</p>
-          <h4 className="element__title">React.js</h4>
+          <p className="element__categories">{book.volumeInfo.categories
+            ? book.volumeInfo.categories
+            : 'Категория не указана'}</p>
+          <h4 className="element__title">{book.volumeInfo.title
+              ? book.volumeInfo.title
+              : 'Название не указано'}</h4>
           <p className="card__author">
-            <a href="/#" className="element__link">Timur Marokko</a>
+            <p href="/#" className="element__link">{book.volumeInfo.authors
+            ? book.volumeInfo.authors
+            : 'Автор не указан'}</p>
           </p>
-          <p className="element__subtitle">About JavaScript Framework</p>
+          <p className="element__subtitle">{book.volumeInfo.description
+            ? book.volumeInfo.description
+            : 'Описание отсутствует'}</p>
         </div>
       </div>
     </section>

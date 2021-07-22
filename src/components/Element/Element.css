@@ -44,7 +44,7 @@
   margin-bottom: 25px;
 }
 
-.card__author {
+.element__author {
   font: normal 400 16px "Roboto", sans-serif;
   margin-bottom: 40px;
 }
@@ -61,4 +61,7 @@
 
   box-sizing: border-box;
   padding: 25px;
+  margin: 0;
+
+  font: normal 400 14px "Roboto", sans-serif;
 }

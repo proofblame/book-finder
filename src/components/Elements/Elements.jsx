@@ -1,21 +1,10 @@
 import React from 'react';
 import './Elements.css';
 
-import Card from '../Card/Card';
-
-const Elements = () => {
+const Elements = ({ cardList }) => {
   return (
     <section className="elements section">
-      <ul className="elements__list">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        
-      </ul>
+      <ul className="elements__list">{cardList}</ul>
     </section>
   );
 };

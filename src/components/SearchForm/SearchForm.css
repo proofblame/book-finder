@@ -39,6 +39,8 @@
   width: 100%;
   height: 100%;
 
+  border: 1px solid #767676;
+  box-sizing: border-box;
   padding: 5px;
 }
 
@@ -52,7 +54,6 @@
   flex: 3 1 auto;
 
   box-sizing: border-box;
-
   border: 1px solid #767676;
 
   padding: 10px 16px;
@@ -62,14 +63,14 @@
   max-width: 230px;
   min-height: 40px;
 
-  font: normal 400 16px "Roboto", sans-serif;
+  font: normal 400 16px 'Roboto', sans-serif;
   color: #767676;
 }
 
 .search__subtitile {
   width: 100%;
   white-space: nowrap;
-  font: normal 500 16px "Roboto", sans-serif;
+  font: normal 500 16px 'Roboto', sans-serif;
   color: #fff;
   flex: 1 3 auto;
 }
@@ -87,7 +88,7 @@
 }
 
 .search__submit {
-  background: url("../../images/search-icon.png") center / cover no-repeat;
+  background: url('../../images/search-icon.png') center / cover no-repeat;
   border: 0;
   width: 100%;
   height: 100%;

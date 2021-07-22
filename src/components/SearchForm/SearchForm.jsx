@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SearchForm.css';
-
-import booksApi from '../../utils/booksApi';
 
 const SearchForm = ({
   handleSubmit,
@@ -40,7 +38,7 @@ const SearchForm = ({
             value={searchCategory}
             onChange={(e) => setSearchCategory(e.target.value)}
           >
-            <option defaultValue="all">all</option>
+            <option value="">all</option>
             <option value="art">art</option>
             <option value="biography">biography</option>
             <option value="computers">computers</option>
@@ -57,7 +55,7 @@ const SearchForm = ({
             value={searchSort}
             onChange={(e) => setSearchSort(e.target.value)}
           >
-            <option defaultValue="relevance">relevance</option>
+            <option value="relevance">relevance</option>
             <option value="newest">newest</option>
           </select>
         </fieldset>

@@ -47,6 +47,9 @@
 .element__author {
   font: normal 400 16px "Roboto", sans-serif;
   margin-bottom: 40px;
+
+  color: #878787;
+  text-decoration: underline;
 }
 
 .element__link {

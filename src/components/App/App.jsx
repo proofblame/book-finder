@@ -1,32 +1,37 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Element from '../Element/Element';
-import Card from '../Card/Card';
 
 import booksApi from '../../utils/booksApi';
 
 const App = () => {
   const [searchValue, setSearchValue] = useState('');
   const [searchCategory, setSearchCategory] = useState('');
-  const [searchSort, setSearchSort] = useState('');
+  const [searchSort, setSearchSort] = useState('relevance');
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState();
+  const [totalItems, setTotalItems] = useState(0);
+  const [notFound, setNotFound] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchSort);
+    setBooks([]);
     booksApi
-      .getBooks(searchValue)
+      .getBooks(searchValue, searchSort, searchCategory)
       .then((result) => {
-        if (result) {
+        if (result.totalItems !== 0) {
           setBooks(result.items);
+          setTotalItems(result.totalItems);
+          setNotFound(false)
+        } else {
+          setTotalItems(result.totalItems)
+          setNotFound(true)
         }
 
-        console.log(result.items);
       })
       .catch((error) => {
         console.log(error);
@@ -35,13 +40,8 @@ const App = () => {
 
   const handleBookClick = (clickedBook) => {
     setSelectedBook(clickedBook);
-    console.log(clickedBook)
+    console.log(clickedBook);
   };
-
-  const cardList = books.map((book) => {
-    return <Card key={book.id} book={book} onCardClick={handleBookClick} />;
-  });
-
 
 
   return (
@@ -58,7 +58,12 @@ const App = () => {
       <Router>
         <Switch>
           <Route exact path="/">
-            <Main cardList={cardList} books={books} />
+            <Main 
+            totalItems={totalItems} 
+            onCardClick={handleBookClick}
+            books={books}
+            notFound={notFound}
+            />
           </Route>
           <Route exact path="/cards">
             <Element book={selectedBook} />

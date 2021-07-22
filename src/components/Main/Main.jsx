@@ -3,13 +3,14 @@ import './Main.css';
 
 import Elements from '../Elements/Elements';
 
-const Main = ({ cardList, books }) => {
+const Main = ({ books, totalItems, onCardClick, notFound }) => {
 
   return (
     <main className="main section">
-      <p className="main__subtitle">Found {books.length} results</p>
-      <Elements 
-      cardList={cardList} />
+      <p className='main__subtitle'>
+        {notFound ? 'Not Found' : `Found ${totalItems} results`}
+      </p>
+      <Elements onCardClick={onCardClick} books={books} />
     </main>
   );
 };

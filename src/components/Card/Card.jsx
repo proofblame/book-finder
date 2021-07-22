@@ -14,7 +14,9 @@ const Card = ({ book, onCardClick }) => {
           className="card__image"
           src={
             book.volumeInfo.imageLinks
-              ? book.volumeInfo.imageLinks.thumbnail
+              ? book.volumeInfo.imageLinks.medium ||
+                book.volumeInfo.imageLinks.small ||
+                book.volumeInfo.imageLinks.thumbnail
               : 'https://cima-afrique.org/cima/images/not-available.png'
           }
           alt={book.volumeInfo.title}

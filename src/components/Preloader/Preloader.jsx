@@ -1,9 +1,9 @@
 import React from 'react';
 import './Preloader.css';
 
-const Preloader = ({ preloaderActive }) => {
+const Preloader = () => {
   return (
-    <div className={`lds-ellipsis ${preloaderActive ? '' : 'preloader_hidden'}`}>
+    <div className={`lds-ellipsis `}>
       <div></div>
       <div></div>
       <div></div>

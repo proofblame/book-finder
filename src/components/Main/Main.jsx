@@ -15,12 +15,18 @@ const Main = ({
 }) => {
   return (
     <main className="main section">
-      {preloaderActive ? (
-        <Preloader preloaderActive={preloaderActive} />
+      {preloaderActive && !books ? (
+        <Preloader />
       ) : (
-        <p className="main__subtitle">
-          {notFound ? 'Not Found' : `Found ${totalItems} results`}
-        </p>
+        <>
+          {totalItems === 0 ? (
+            ''
+          ) : (
+            <p className="main__subtitle">
+              {notFound ? 'Not Found' : `Found ${totalItems} results`}
+            </p>
+          )}
+        </>
       )}
       <Elements
         onCardClick={onCardClick}

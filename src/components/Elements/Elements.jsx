@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Elements.css';
 import Card from '../Card/Card';
 import Preloader from '../Preloader/Preloader';
@@ -10,13 +10,17 @@ const Elements = ({
   handleLoadMore,
   preloaderActive,
 }) => {
-  // Рендер карточек на странице
-  const cardList = books.map((book) => {
-    return <Card key={book.id} book={book} onCardClick={onCardClick} />;
-  });
+    // Рендер карточек на странице
+    const cardList = books.map((book) => {
+      return <Card key={book.id && book.etag} book={book} onCardClick={onCardClick} />;
+    });
+  useEffect(() => {
+
+  }, [])
+
 
   const buttonState = preloaderActive ? (
-    <Preloader preloaderActive={preloaderActive} />
+    <Preloader/>
   ) : (
     <button
       className={

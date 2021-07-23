@@ -15,3 +15,27 @@
   gap: 45px;
   justify-items: center;
 }
+.elements__button {
+  width: 200px;
+  color: #fff;
+  display: block;
+  text-align: center;
+  margin: 20px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-color: gray;
+  transition: .3s;
+}
+
+.elements__button:hover {
+  color: gray;
+  background-color: #fff;
+  border: 1px solid gray;
+  text-decoration: none;
+}
+
+.elements__button_hidden {
+  display: none;
+}

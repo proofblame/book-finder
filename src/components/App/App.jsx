@@ -15,23 +15,49 @@ const App = () => {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState();
   const [totalItems, setTotalItems] = useState(0);
+  const [loadQuantity, setLoadQuantity] = useState(0);
   const [notFound, setNotFound] = useState(false);
+  const [startIndex, setStartIndex] = useState(0);
+  const [maxResults, setMaxResults] = useState(30);
+  const [preloaderActive, setPreloaderActive] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPreloaderActive(true);
     setBooks([]);
     booksApi
-      .getBooks(searchValue, searchSort, searchCategory)
+      .getBooks(searchValue, searchSort, searchCategory, startIndex, maxResults)
       .then((result) => {
-        if (result.totalItems !== 0) {
+        if (result.items.length !== 0) {
+          setPreloaderActive(false);
           setBooks(result.items);
           setTotalItems(result.totalItems);
-          setNotFound(false)
+          setLoadQuantity(result.items.length);
+          setNotFound(false);
+          setStartIndex(startIndex + maxResults);
         } else {
-          setTotalItems(result.totalItems)
-          setNotFound(true)
+          setTotalItems(result.totalItems);
+          setNotFound(true);
         }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  const handleLoadMore = () => {
+    setPreloaderActive(true);
+    booksApi
+      .getBooks(searchValue, searchSort, searchCategory, startIndex, maxResults)
+      .then((result) => {
+        if (result.items.length !== 0) {
+          setPreloaderActive(false);
+          setStartIndex(startIndex + maxResults);
+          setBooks([...books, ...result.items]);
+          setLoadQuantity(result.items.length);
+        } else {
+          setTotalItems(0);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -40,29 +66,30 @@ const App = () => {
 
   const handleBookClick = (clickedBook) => {
     setSelectedBook(clickedBook);
-    console.log(clickedBook);
   };
-
 
   return (
     <section className="app">
-      <Header
-        handleSubmit={handleSubmit}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-        setSearchCategory={setSearchCategory}
-        setSearchSort={setSearchSort}
-        searchCategory={searchCategory}
-        searchSort={searchSort}
-      />
       <Router>
+        <Header
+          handleSubmit={handleSubmit}
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          setSearchCategory={setSearchCategory}
+          setSearchSort={setSearchSort}
+          searchCategory={searchCategory}
+          searchSort={searchSort}
+        />
         <Switch>
           <Route exact path="/">
-            <Main 
-            totalItems={totalItems} 
-            onCardClick={handleBookClick}
-            books={books}
-            notFound={notFound}
+            <Main
+              totalItems={totalItems}
+              onCardClick={handleBookClick}
+              books={books}
+              notFound={notFound}
+              handleLoadMore={handleLoadMore}
+              loadQuantity={loadQuantity}
+              preloaderActive={preloaderActive}
             />
           </Route>
           <Route exact path="/cards">

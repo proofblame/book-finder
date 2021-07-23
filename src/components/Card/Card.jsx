@@ -25,7 +25,7 @@ const Card = ({ book, onCardClick }) => {
       <div className="card__wrapper">
         <a className="card__categories" href="/#">
           {book.volumeInfo.categories
-            ? book.volumeInfo.categories
+            ? book.volumeInfo.categories[0]
             : 'Категория не указана'}
         </a>
         <Link to="/cards" onClick={handleClick}>

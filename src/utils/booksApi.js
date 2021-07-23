@@ -7,9 +7,9 @@ class BooksApi {
   }
 
   // Получить фильмы
-  getBooks(books, searchSort, searchCategory) {
+  getBooks(books, searchSort, searchCategory, startIndex, maxResults) {
     return fetch(
-      `${this._baseUrl}${books}+subject:${searchCategory}&maxResults=${this._settings.maxResults}&orderBy=${searchSort}&key=${this._settings.apiKey}`,
+      `${this._baseUrl}${books}+subject:${searchCategory}&maxResults=${maxResults}&startIndex=${startIndex}&printType=books&orderBy=${searchSort}&key=${this._settings.apiKey}`,
       {
         headers: this._headers,
       }
@@ -35,7 +35,6 @@ const booksApi = new BooksApi({
   },
   settings: {
     apiKey: 'AIzaSyBcE5HnWDendaZl3zQMRKnz28dyxHV-iHo',
-    maxResults: '30',
   },
 });
 
